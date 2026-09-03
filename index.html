@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,28 +31,44 @@
         <div class="nav-container">
 
             <a href="#" class="logo">
+
                 <img src="assets/logo.png" alt="FlashPeak Logo">
 
                 <div>
                     <span>FLASH</span><strong>PEAK</strong>
                     <small>AGILITY UNITED STATES</small>
                 </div>
+
             </a>
 
 
             <nav class="nav-menu">
 
                 <a href="#">Home</a>
-                <a href="#" class="active">Members</a>
-                <a href="#">Divisions</a>
-                <a href="#">Achievements</a>
-                <a href="#">About Us</a>
+
+                <a href="#" class="active">
+                    Members
+                </a>
+
+                <a href="#">
+                    Divisions
+                </a>
+
+                <a href="#">
+                    Achievements
+                </a>
+
+                <a href="#">
+                    About Us
+                </a>
 
             </nav>
 
 
-            <button class="menu-toggle">
+            <button class="menu-toggle" aria-label="Toggle menu">
+
                 <i class="fa-solid fa-bars"></i>
+
             </button>
 
         </div>
@@ -106,7 +121,7 @@
         </div>
 
 
-        <!-- SEARCH -->
+        <!-- ================= SEARCH ================= -->
 
         <div class="member-tools">
 
@@ -117,7 +132,8 @@
                 <input
                     type="text"
                     id="searchMember"
-                    placeholder="Search nickname...">
+                    placeholder="Search nickname..."
+                    autocomplete="off">
 
             </div>
 
@@ -126,14 +142,16 @@
 
                 <i class="fa-solid fa-users"></i>
 
-                <span id="memberCount">20</span> Members
+                <span id="memberCount">0</span>
+
+                Members
 
             </div>
 
         </div>
 
 
-        <!-- MEMBER TABLE -->
+        <!-- ================= MEMBER TABLE ================= -->
 
         <div class="table-container">
 
@@ -156,249 +174,16 @@
                 </thead>
 
 
-                <tbody>
+                <!--
+                    DATA MEMBER AKAN DIMASUKKAN
+                    OTOMATIS DARI GOOGLE SHEETS
+                    MELALUI script.js
+                -->
 
-                    <tr>
-                        <td>01</td>
-                        <td class="nickname">AGI.Revin</td>
-                        <td>100001</td>
-                        <td>
-                            <span class="role leader">
-                                <i class="fa-solid fa-crown"></i>
-                                Leader
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>02</td>
-                        <td class="nickname">AGI.DABOO</td>
-                        <td>100002</td>
-                        <td>
-                            <span class="role captain">
-                                Captain
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>03</td>
-                        <td class="nickname">AGI.Batut</td>
-                        <td>100003</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>04</td>
-                        <td class="nickname">AGI.Iky</td>
-                        <td>100004</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>05</td>
-                        <td class="nickname">AGI.Smokuy</td>
-                        <td>100005</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>06</td>
-                        <td class="nickname">AGI.RotzyArt</td>
-                        <td>100006</td>
-                        <td>
-                            <span class="role staff">
-                                Staff
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>07</td>
-                        <td class="nickname">AGI.Admin</td>
-                        <td>100007</td>
-                        <td>
-                            <span class="role staff">
-                                Staff
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>08</td>
-                        <td class="nickname">AGI.Kenzo</td>
-                        <td>100008</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>09</td>
-                        <td class="nickname">AGI.Raven</td>
-                        <td>100009</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>10</td>
-                        <td class="nickname">AGI.Axel</td>
-                        <td>100010</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>11</td>
-                        <td class="nickname">AGI.Nova</td>
-                        <td>100011</td>
-                        <td>
-                            <span class="role staff">
-                                Staff
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>12</td>
-                        <td class="nickname">AGI.Zeus</td>
-                        <td>100012</td>
-                        <td>
-                            <span class="role staff">
-                                Staff
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>13</td>
-                        <td class="nickname">AGI.Shadow</td>
-                        <td>100013</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>14</td>
-                        <td class="nickname">AGI.Blaze</td>
-                        <td>100014</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>15</td>
-                        <td class="nickname">AGI.Luna</td>
-                        <td>100015</td>
-                        <td>
-                            <span class="role staff">
-                                Staff
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>16</td>
-                        <td class="nickname">AGI.Vortex</td>
-                        <td>100016</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>17</td>
-                        <td class="nickname">AGI.Frost</td>
-                        <td>100017</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>18</td>
-                        <td class="nickname">AGI.Kiro</td>
-                        <td>100018</td>
-                        <td>
-                            <span class="role staff">
-                                Staff
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>19</td>
-                        <td class="nickname">AGI.Dragon</td>
-                        <td>100019</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>20</td>
-                        <td class="nickname">AGI.Ace</td>
-                        <td>100020</td>
-                        <td>
-                            <span class="role player">
-                                Player
-                            </span>
-                        </td>
-                    </tr>
+                <tbody id="memberTableBody">
 
                 </tbody>
+
 
             </table>
 
@@ -415,13 +200,19 @@
 
             <div class="footer-brand">
 
-                <img src="assets/logo.png" alt="FlashPeak">
+                <img
+                    src="assets/logo.png"
+                    alt="FlashPeak">
 
                 <div>
 
-                    <h3>FLASHPEAK</h3>
+                    <h3>
+                        FLASHPEAK
+                    </h3>
 
-                    <p>Agility United States</p>
+                    <p>
+                        Agility United States
+                    </p>
 
                 </div>
 
@@ -430,16 +221,24 @@
 
             <div class="social">
 
-                <a href="#">
+                <a href="#" aria-label="Instagram">
+
                     <i class="fa-brands fa-instagram"></i>
+
                 </a>
 
-                <a href="#">
+
+                <a href="#" aria-label="Discord">
+
                     <i class="fa-brands fa-discord"></i>
+
                 </a>
 
-                <a href="#">
+
+                <a href="#" aria-label="TikTok">
+
                     <i class="fa-brands fa-tiktok"></i>
+
                 </a>
 
             </div>
@@ -458,75 +257,8 @@
 
     <!-- ================= JAVASCRIPT ================= -->
 
-    <script>
-
-        const searchInput =
-            document.getElementById("searchMember");
-
-        const table =
-            document.getElementById("memberTable");
-
-        const rows =
-            table.querySelectorAll("tbody tr");
-
-        const memberCount =
-            document.getElementById("memberCount");
-
-
-        searchInput.addEventListener("keyup", function () {
-
-            const search =
-                this.value.toLowerCase();
-
-            let visibleMembers = 0;
-
-
-            rows.forEach(row => {
-
-                const nickname =
-                    row.querySelector(".nickname")
-                        .textContent
-                        .toLowerCase();
-
-
-                if (nickname.includes(search)) {
-
-                    row.style.display = "";
-                    visibleMembers++;
-
-                } else {
-
-                    row.style.display = "none";
-
-                }
-
-            });
-
-
-            memberCount.textContent =
-                visibleMembers;
-
-        });
-
-
-        /* MOBILE MENU */
-
-        const menuToggle =
-            document.querySelector(".menu-toggle");
-
-        const navMenu =
-            document.querySelector(".nav-menu");
-
-
-        menuToggle.addEventListener("click", () => {
-
-            navMenu.classList.toggle("show");
-
-        });
-
-    </script>
+    <script src="script.js"></script>
 
 </body>
 
 </html>
-```

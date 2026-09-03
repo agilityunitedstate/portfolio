@@ -115,3 +115,57 @@ revealElements.forEach(element => {
     revealObserver.observe(element);
 
 });
+/* ==============================
+   GOOGLE SHEETS - MEMBERS
+============================== */
+
+const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRFOjYaAQoUhvfbhqmv_OPlyjJ6hCiO95_po-zIgh6KZPyzilTr567XrcxphEScS4rDQ9oz3GvD2LIe/pub?output=csv";
+
+async function loadMembers() {
+
+    try {
+
+        const response = await fetch(sheetURL);
+        const csvText = await response.text();
+
+        const rows = csvText
+            .trim()
+            .split("\n")
+            .map(row => row.split(","));
+
+        const tableBody = document.getElementById("memberTableBody");
+
+        if (!tableBody) return;
+
+        tableBody.innerHTML = "";
+
+        rows.slice(1).forEach((row, index) => {
+
+            if (row.length < 3) return;
+
+            const nickname = row[0].trim();
+            const gameID = row[1].trim();
+            const role = row[2].trim();
+
+            const tr = document.createElement("tr");
+
+            tr.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${nickname}</td>
+                <td>${gameID}</td>
+                <td>${role}</td>
+            `;
+
+            tableBody.appendChild(tr);
+
+        });
+
+    } catch (error) {
+
+        console.error("Gagal mengambil data Google Sheets:", error);
+
+    }
+
+}
+
+loadMembers();

@@ -1,264 +1,660 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>FlashPeak | Members</title>
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap"
-        rel="stylesheet">
+    <title>FlashPeak | Agility United States</title>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+
+    <!-- ==============================
+         NAVBAR
+    ============================== -->
 
     <header class="navbar">
 
         <div class="nav-container">
 
-            <a href="#" class="logo">
 
-                <img src="assets/logo.png" alt="FlashPeak Logo">
+            <!-- LOGO -->
 
-                <div>
-                    <span>FLASH</span><strong>PEAK</strong>
-                    <small>AGILITY UNITED STATES</small>
+            <a href="index.html" class="logo">
+
+                <img
+                    src="assets/logo.png"
+                    alt="FlashPeak Logo"
+                >
+
+                <div class="logo-text">
+
+                    <span>FLASH</span>
+                    <strong>PEAK</strong>
+
+                    <small>
+                        AGILITY UNITED STATES
+                    </small>
+
                 </div>
 
             </a>
 
 
+            <!-- NAVIGATION -->
+
             <nav class="nav-menu">
 
-                <a href="#">Home</a>
-
-                <a href="#" class="active">
-                    Members
+                <a
+                    href="index.html"
+                    class="nav-link active"
+                >
+                    Home
                 </a>
 
-                <a href="#">
+                <a
+                    href="about.html"
+                    class="nav-link"
+                >
+                    About Us
+                </a>
+
+                <a
+                    href="divisions.html"
+                    class="nav-link"
+                >
                     Divisions
                 </a>
 
-                <a href="#">
+                <a
+                    href="members.html"
+                    class="nav-link"
+                >
+                    Members
+                </a>
+
+                <a
+                    href="achievements.html"
+                    class="nav-link"
+                >
                     Achievements
                 </a>
 
-                <a href="#">
-                    About Us
+                <a
+                    href="contact.html"
+                    class="nav-link"
+                >
+                    Contact
                 </a>
 
             </nav>
 
 
-            <button class="menu-toggle" aria-label="Toggle menu">
+            <!-- MOBILE MENU -->
+
+            <button
+                class="menu-toggle"
+                aria-label="Open navigation menu"
+            >
 
                 <i class="fa-solid fa-bars"></i>
 
             </button>
+
 
         </div>
 
     </header>
 
 
-    <!-- ================= MEMBER HERO ================= -->
 
-    <section class="member-hero">
+    <!-- ==============================
+         HOME
+    ============================== -->
 
-        <div class="hero-content">
-
-            <p class="label">
-                AGILITY UNITED STATES
-            </p>
-
-            <h1>
-                OUR <span>MEMBERS</span>
-            </h1>
-
-            <p>
-                Meet the players and members who represent
-                FlashPeak with passion, teamwork, and dedication.
-            </p>
-
-        </div>
-
-    </section>
+    <main>
 
 
-    <!-- ================= MEMBERS ================= -->
-
-    <section class="members-section">
-
-        <div class="section-title">
-
-            <p class="label">
-                FLASHPEAK COMMUNITY
-            </p>
-
-            <h2>
-                MEMBER <span>ROSTER</span>
-            </h2>
-
-            <p>
-                Official member list of FlashPeak.
-            </p>
-
-        </div>
+        <section class="home-section">
 
 
-        <!-- ================= SEARCH ================= -->
+            <!-- Background Decoration -->
 
-        <div class="member-tools">
-
-            <div class="search-box">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    id="searchMember"
-                    placeholder="Search nickname..."
-                    autocomplete="off">
-
-            </div>
+            <div class="home-overlay"></div>
 
 
-            <div class="member-count">
-
-                <i class="fa-solid fa-users"></i>
-
-                <span id="memberCount">0</span>
-
-                Members
-
-            </div>
-
-        </div>
+            <div class="home-container">
 
 
-        <!-- ================= MEMBER TABLE ================= -->
+                <!-- LEFT CONTENT -->
 
-        <div class="table-container">
-
-            <table id="memberTable">
-
-                <thead>
-
-                    <tr>
-
-                        <th>NO.</th>
-
-                        <th>NICKNAME</th>
-
-                        <th>GAME ID</th>
-
-                        <th>ROLE</th>
-
-                    </tr>
-
-                </thead>
+                <div class="home-content">
 
 
-                <!--
-                    DATA MEMBER AKAN DIMASUKKAN
-                    OTOMATIS DARI GOOGLE SHEETS
-                    MELALUI script.js
-                -->
+                    <span class="home-label">
 
-                <tbody id="memberTableBody">
+                        AGILITY UNITED STATES
 
-                </tbody>
+                    </span>
 
 
-            </table>
+                    <h1>
 
-        </div>
+                        FLASH<span>PEAK</span>
 
-    </section>
+                    </h1>
 
 
-    <!-- ================= FOOTER ================= -->
+                    <h2>
 
-    <footer>
+                        RISE. COMPETE. CONQUER.
 
-        <div class="footer-content">
+                    </h2>
 
-            <div class="footer-brand">
-
-                <img
-                    src="assets/logo.png"
-                    alt="FlashPeak">
-
-                <div>
-
-                    <h3>
-                        FLASHPEAK
-                    </h3>
 
                     <p>
-                        Agility United States
+
+                        Welcome to FlashPeak, a competitive gaming
+                        community under Agility United States.
+                        We bring together passionate players,
+                        competitive teams, and creative talents
+                        to build a stronger gaming community.
+
                     </p>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="home-buttons">
+
+                        <a
+                            href="members.html"
+                            class="btn btn-primary"
+                        >
+
+                            <i class="fa-solid fa-users"></i>
+
+                            Our Members
+
+                        </a>
+
+
+                        <a
+                            href="about.html"
+                            class="btn btn-outline"
+                        >
+
+                            Learn More
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- SOCIAL MEDIA -->
+
+                    <div class="home-social">
+
+                        <span>
+                            Follow Us
+                        </span>
+
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+
+                            <i class="fa-brands fa-instagram"></i>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="Discord"
+                        >
+
+                            <i class="fa-brands fa-discord"></i>
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            aria-label="TikTok"
+                        >
+
+                            <i class="fa-brands fa-tiktok"></i>
+
+                        </a>
+
+                    </div>
+
 
                 </div>
 
+
+
+                <!-- RIGHT LOGO -->
+
+                <div class="home-logo">
+
+
+                    <div class="logo-glow"></div>
+
+
+                    <img
+                        src="assets/logo.png"
+                        alt="FlashPeak"
+                    >
+
+
+                </div>
+
+
             </div>
 
 
-            <div class="social">
+            <!-- SCROLL INDICATOR -->
 
-                <a href="#" aria-label="Instagram">
+            <div class="scroll-indicator">
 
-                    <i class="fa-brands fa-instagram"></i>
+                <span>
+                    SCROLL TO EXPLORE
+                </span>
 
-                </a>
-
-
-                <a href="#" aria-label="Discord">
-
-                    <i class="fa-brands fa-discord"></i>
-
-                </a>
-
-
-                <a href="#" aria-label="TikTok">
-
-                    <i class="fa-brands fa-tiktok"></i>
-
-                </a>
+                <i class="fa-solid fa-chevron-down"></i>
 
             </div>
+
+
+        </section>
+
+
+
+        <!-- ==============================
+             QUICK INTRO
+        ============================== -->
+
+        <section class="home-intro">
+
+
+            <div class="section-container">
+
+
+                <div class="section-heading">
+
+                    <span>
+                        WELCOME TO
+                    </span>
+
+                    <h2>
+                        FLASH<span>PEAK</span>
+                    </h2>
+
+                </div>
+
+
+                <div class="intro-grid">
+
+
+                    <!-- CARD 1 -->
+
+                    <div class="intro-card">
+
+                        <div class="intro-icon">
+
+                            <i class="fa-solid fa-gamepad"></i>
+
+                        </div>
+
+                        <h3>
+                            Competitive Gaming
+                        </h3>
+
+                        <p>
+
+                            Building competitive teams
+                            and developing players to reach
+                            their highest potential.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- CARD 2 -->
+
+                    <div class="intro-card">
+
+                        <div class="intro-icon">
+
+                            <i class="fa-solid fa-users"></i>
+
+                        </div>
+
+                        <h3>
+                            Strong Community
+                        </h3>
+
+                        <p>
+
+                            Creating a community where
+                            players can connect, collaborate,
+                            and grow together.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- CARD 3 -->
+
+                    <div class="intro-card">
+
+                        <div class="intro-icon">
+
+                            <i class="fa-solid fa-trophy"></i>
+
+                        </div>
+
+                        <h3>
+                            Achieve More
+                        </h3>
+
+                        <p>
+
+                            Competing in tournaments,
+                            events, and challenges while
+                            creating memorable achievements.
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ABOUT BUTTON -->
+
+                <div class="intro-button">
+
+                    <a
+                        href="about.html"
+                        class="btn btn-outline"
+                    >
+
+                        About FlashPeak
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==============================
+             FEATURED SECTION
+        ============================== -->
+
+        <section class="home-featured">
+
+
+            <div class="section-container">
+
+
+                <div class="featured-content">
+
+
+                    <span class="home-label">
+                        JOIN THE COMMUNITY
+                    </span>
+
+
+                    <h2>
+
+                        PLAY TOGETHER.
+                        <br>
+                        <span>GROW TOGETHER.</span>
+
+                    </h2>
+
+
+                    <p>
+
+                        FlashPeak is more than just a gaming
+                        group. It is a community built around
+                        teamwork, competition, friendship,
+                        and continuous improvement.
+
+                    </p>
+
+
+                    <a
+                        href="contact.html"
+                        class="btn btn-primary"
+                    >
+
+                        Get In Touch
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ==============================
+         FOOTER
+    ============================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-container">
+
+
+            <!-- BRAND -->
+
+            <div class="footer-brand">
+
+
+                <a
+                    href="index.html"
+                    class="footer-logo"
+                >
+
+                    <img
+                        src="assets/logo.png"
+                        alt="FlashPeak Logo"
+                    >
+
+
+                    <div>
+
+                        <span>
+                            FLASH<strong>PEAK</strong>
+                        </span>
+
+                        <small>
+                            AGILITY UNITED STATES
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+                <p>
+
+                    Rise. Compete. Conquer.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- LINKS -->
+
+            <div class="footer-links">
+
+
+                <h4>
+                    Navigation
+                </h4>
+
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="about.html">
+                    About Us
+                </a>
+
+                <a href="divisions.html">
+                    Divisions
+                </a>
+
+                <a href="members.html">
+                    Members
+                </a>
+
+                <a href="achievements.html">
+                    Achievements
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+
+            </div>
+
+
+
+            <!-- SOCIAL -->
+
+            <div class="footer-social">
+
+
+                <h4>
+                    Follow Us
+                </h4>
+
+
+                <div class="social-icons">
+
+
+                    <a
+                        href="#"
+                        aria-label="Instagram"
+                    >
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        aria-label="Discord"
+                    >
+
+                        <i class="fa-brands fa-discord"></i>
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        aria-label="TikTok"
+                    >
+
+                        <i class="fa-brands fa-tiktok"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
 
         </div>
 
 
-        <div class="copyright">
 
-            © 2026 FlashPeak — Agility United States
+        <!-- COPYRIGHT -->
+
+        <div class="footer-bottom">
+
+
+            <p>
+
+                © 2026 FlashPeak — Agility United States.
+                All Rights Reserved.
+
+            </p>
+
 
         </div>
+
 
     </footer>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
+
+    <!-- ==============================
+         JAVASCRIPT
+    ============================== -->
 
     <script src="script.js"></script>
+
 
 </body>
 
 </html>
+```

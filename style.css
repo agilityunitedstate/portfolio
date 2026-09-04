@@ -1616,31 +1616,48 @@ td:nth-child(3) {
    FOOTER
 ===================================== */
 
-footer {
-
-    margin-top: 40px;
+.site-footer {
 
     background: #050505;
 
     border-top: 1px solid #1c1c1c;
+
+    margin-top: 0;
+
+    position: relative;
+
 }
 
 
-.footer-content {
+/* =====================================
+   FOOTER CONTAINER
+===================================== */
 
-    max-width: 1100px;
+.footer-container {
+
+    max-width: 1150px;
 
     margin: auto;
 
-    padding: 35px 30px;
+    padding: 70px 30px 60px;
 
-    display: flex;
+    display: grid;
 
-    justify-content: space-between;
+    grid-template-columns:
+        1fr
+        1fr
+        1.2fr;
 
-    align-items: center;
+    gap: 60px;
+
+    align-items: start;
+
 }
 
+
+/* =====================================
+   FOOTER BRAND
+===================================== */
 
 .footer-brand {
 
@@ -1648,74 +1665,220 @@ footer {
 
     align-items: center;
 
-    gap: 12px;
+    gap: 14px;
+
 }
 
 
 .footer-brand img {
 
-    width: 42px;
+    width: 55px;
 
-    height: 42px;
+    height: 55px;
 
     object-fit: contain;
+
 }
 
 
-.footer-brand h3 {
+.footer-brand-text h3 {
 
     font-family: "Orbitron", sans-serif;
 
-    font-size: 13px;
+    font-size: 18px;
+
+    font-weight: 800;
+
+    color: #ffffff;
+
 }
 
 
-.footer-brand p {
+.footer-brand-text h3 span {
+
+    color: var(--orange);
+
+}
+
+
+.footer-brand-text p {
+
+    margin-top: 5px;
 
     color: #555;
 
-    font-size: 10px;
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
 }
 
 
-.social {
+/* =====================================
+   FOOTER TAGLINE
+===================================== */
+
+.footer-tagline {
 
     display: flex;
 
-    gap: 20px;
+    align-items: center;
+
+    justify-content: center;
+
+    height: 100%;
 }
 
 
-.social a {
+.footer-tagline p {
 
     color: #666;
 
-    font-size: 17px;
+    font-family: "Orbitron", sans-serif;
 
-    transition: 0.3s;
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
 }
 
 
-.social a:hover {
+/* =====================================
+   FOOTER CONTACT
+===================================== */
+
+.footer-contact {
+
+    border-left: 1px solid #202020;
+
+    padding-left: 40px;
+
+}
+
+
+.footer-label {
+
+    display: block;
 
     color: var(--orange);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+
 }
 
 
-.copyright {
+.footer-contact h3 {
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 20px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.footer-contact > p {
+
+    max-width: 350px;
+
+    color: #666;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    margin-bottom: 20px;
+
+}
+
+
+/* =====================================
+   CONTACT LINKS
+===================================== */
+
+.contact-links {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+
+.contact-links a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    color: #777;
+
+    background: #0d0d0d;
+
+    border: 1px solid #202020;
+
+    font-size: 10px;
+
+    transition: 0.3s;
+
+}
+
+
+.contact-links a i {
+
+    font-size: 13px;
+
+}
+
+
+.contact-links a:hover {
+
+    color: var(--orange);
+
+    border-color: var(--orange);
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =====================================
+   FOOTER BOTTOM
+===================================== */
+
+.footer-bottom {
 
     border-top: 1px solid #151515;
 
+    padding: 20px 30px;
+
     text-align: center;
 
-    padding: 18px;
+}
+
+
+.footer-bottom p {
 
     color: #444;
 
     font-size: 9px;
+
+    letter-spacing: 0.3px;
+
 }
-
-
 /* =====================================
    RESPONSIVE
 ===================================== */

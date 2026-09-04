@@ -13,7 +13,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
-    <!-- CSS -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -27,7 +27,6 @@
 
         <div class="nav-container">
 
-            <!-- LOGO -->
             <a href="index.html" class="logo">
 
                 <img
@@ -50,7 +49,6 @@
             </a>
 
 
-            <!-- NAVIGATION -->
             <nav class="nav-menu">
 
                 <a href="index.html" class="nav-link">
@@ -72,7 +70,6 @@
             </nav>
 
 
-            <!-- MOBILE MENU -->
             <button
                 class="menu-toggle"
                 aria-label="Open navigation"
@@ -85,7 +82,6 @@
     </header>
 
 
-
     <!-- =================================
          MAIN
     ================================== -->
@@ -93,7 +89,7 @@
     <main>
 
         <!-- =================================
-             DIVISION HERO
+             HERO
         ================================== -->
 
         <section class="division-hero">
@@ -119,7 +115,6 @@
             </div>
 
         </section>
-
 
 
         <!-- =================================
@@ -148,8 +143,6 @@
                 </div>
 
 
-                <!-- CLUB LEADER CARD -->
-
                 <div class="club-leader-card">
 
                     <div class="leader-number">
@@ -158,9 +151,7 @@
 
 
                     <div class="leader-icon">
-
                         <i class="fa-solid fa-crown"></i>
-
                     </div>
 
 
@@ -170,6 +161,7 @@
                             CLUB LEADER
                         </span>
 
+                        <!-- GANTI NAMA KETUA KLUB DI SINI -->
                         <h3>
                             NICKNAME KETUA
                         </h3>
@@ -189,6 +181,7 @@
                                 GAME ID
                             </span>
 
+                            <!-- GANTI ID -->
                             <strong>
                                 00000000
                             </strong>
@@ -217,34 +210,55 @@
         </section>
 
 
+        <!-- =================================
+             TEAM DIVISIONS
+        ================================== -->
 
-<section class="teams-section">
+        <section class="teams-section">
 
-    <div class="division-container">
+            <div class="division-container">
 
-        <div class="section-heading">
+                <div class="section-heading">
 
-            <span>
-                AGILITY UNITED
-            </span>
+                    <span>
+                        AGILITY UNITED
+                    </span>
 
-            <h2>
-                TEAM <strong>DIVISIONS</strong>
-            </h2>
+                    <h2>
+                        TEAM <strong>DIVISIONS</strong>
+                    </h2>
 
-            <p>
-                Each division represents a competitive
-                unit within Agility United.
-            </p>
+                    <p>
+                        Each division represents a competitive
+                        unit within Agility United.
+                    </p>
 
-        </div>
+                </div>
 
-        <!-- DIVISIONS AKAN DIISI OTOMATIS OLEH JAVASCRIPT -->
-        <div id="divisions-container"></div>
 
-    </div>
+                <!--
+                    DIVISION CARDS AKAN
+                    DIBUAT OTOMATIS OLEH division.js
+                -->
 
-</section>
+                <div id="divisions-container">
+
+                    <div class="division-loading">
+
+                        <div class="loading-spinner"></div>
+
+                        <span>
+                            LOADING DIVISIONS...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
 
         <!-- =================================
              CTA
@@ -267,9 +281,14 @@
                     One goal.
                 </p>
 
-                <a href="members.html" class="division-cta-button">
+                <a
+                    href="members.html"
+                    class="division-cta-button"
+                >
                     MEET OUR MEMBERS
+
                     <i class="fa-solid fa-arrow-right"></i>
+
                 </a>
 
             </div>
@@ -277,7 +296,6 @@
         </section>
 
     </main>
-
 
 
     <!-- =================================
@@ -290,7 +308,6 @@
 
             <div class="footer-content">
 
-                <!-- BRAND -->
 
                 <div class="footer-brand">
 
@@ -314,8 +331,6 @@
                 </div>
 
 
-                <!-- TAGLINE -->
-
                 <div class="footer-tagline">
 
                     <p>
@@ -324,8 +339,6 @@
 
                 </div>
 
-
-                <!-- CONTACT -->
 
                 <div class="footer-contact">
 
@@ -391,12 +404,17 @@
     </footer>
 
 
-
     <!-- =================================
-         SCRIPT
+         MAIN SCRIPT
     ================================== -->
 
     <script src="script.js"></script>
+
+    <!-- =================================
+         DIVISION SCRIPT
+    ================================== -->
+
+    <script src="division.js"></script>
 
 </body>
 

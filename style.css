@@ -4713,3 +4713,29 @@ td:nth-child(3) {
         gap: 15px;
     }
 }
+.division-members {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+        max-height 0.4s ease,
+        opacity 0.3s ease,
+        padding 0.3s ease;
+
+    padding: 0 32px;
+}
+
+
+.division-card.expanded .division-members {
+
+    max-height: 1000px;
+
+    opacity: 1;
+
+    padding:
+        25px 32px 32px;
+
+    border-top:
+        1px solid #252525;
+
+}

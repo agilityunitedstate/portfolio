@@ -42,27 +42,32 @@ const divisionContainer =
 
 const DIVISION_LOGOS = {
 
-    "01": "assets/division-01.png",
+"AGILITY SHINIGAMI":
+        "assets/divisi-shinigami.jpeg",
 
-    "02": "assets/division-02.png",
+    "AGILITY PHOENIX":
+        "assets/divisi-phoenix.jpeg",
 
-    "03": "assets/division-03.png",
+    "AGILITY TITAN":
+        "assets/divisi-titan.jpeg",
 
-    "04": "assets/division-04.png",
+    "AGILITY REAPER":
+        "assets/divisi-reaper.jpeg",
 
-    "05": "assets/division-05.png",
+    "AGILITY DRAGON":
+        "assets/divisi-dragon.jpeg",
 
-    "06": "assets/division-06.png",
+    "AGILITY STORM":
+        "assets/divisi-storm.jpeg",
 
-    "07": "assets/division-07.png",
+    "AGILITY WOLVES":
+        "assets/divisi-wolves.jpeg",
 
-    "08": "assets/division-08.png",
-
-    "09": "assets/division-09.png",
-
-    "10": "assets/division-10.png"
+    "AGILITY ECLIPSE":
+        "assets/divisi-eclipse.jpeg"
 
 };
+
 
 
 /* =========================================================

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Achievements | Agility United</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+
+<body>
+
+    <!-- =====================================
+         NAVBAR
+    ====================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <img
+                    src="assets/logoagility.jpeg"
+                    alt="Agility United Logo"
+                >
+
+                <div class="logo-text">
+
+                    <span>AGILITY</span>
+
+                    <strong>UNITED</strong>
+
+                    <small>
+                        GAMING COMMUNITY
+                    </small>
+
+                </div>
+
+            </a>
+
+
+            <nav class="nav-menu">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    Home
+                </a>
+
+                <a
+                    href="members.html"
+                    class="nav-link"
+                >
+                    Members
+                </a>
+
+                <a
+                    href="divisions.html"
+                    class="nav-link"
+                >
+                    Divisions
+                </a>
+
+                <a
+                    href="achievements.html"
+                    class="nav-link active"
+                >
+                    Achievements
+                </a>
+
+            </nav>
+
+
+            <button
+                class="menu-toggle"
+                aria-label="Open navigation"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================
+         ACHIEVEMENTS HERO
+    ====================================== -->
+
+    <main>
+
+        <section class="achievements-hero">
+
+            <div class="achievements-hero-overlay"></div>
+
+            <div class="section-container">
+
+                <div class="achievements-hero-content">
+
+                    <span class="home-label">
+                        OUR ACHIEVEMENTS
+                    </span>
+
+                    <h1>
+                        RISE.
+                        <span>COMPETE.</span>
+                        CONQUER.
+                    </h1>
+
+                    <p>
+                        A collection of Agility United's
+                        competitive achievements and
+                        memorable moments.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             ACHIEVEMENTS LIST
+        ====================================== -->
+
+        <section class="achievements-section">
+
+            <div class="section-container">
+
+
+                <!-- HEADING -->
+
+                <div class="section-heading">
+
+                    <span>
+                        OUR JOURNEY
+                    </span>
+
+                    <h2>
+                        HALL OF
+                        <strong>ACHIEVEMENTS</strong>
+                    </h2>
+
+                    <p class="achievements-intro">
+                        Every victory represents teamwork,
+                        dedication, and the effort of every
+                        member of Agility United.
+                    </p>
+
+                </div>
+
+
+
+                <!-- ACHIEVEMENTS -->
+
+                <div class="achievements-list">
+
+
+                    <!-- =================================
+                         ACHIEVEMENT 01
+                    ================================== -->
+
+                    <article class="achievement-card">
+
+                        <div class="achievement-image">
+
+                            <img
+                                src="assets/achievement-01.jpeg"
+                                alt="Agility United First Place Achievement"
+                            >
+
+                            <div class="achievement-rank">
+                                <i class="fa-solid fa-trophy"></i>
+                                <span>1ST PLACE</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="achievement-content">
+
+                            <span class="achievement-number">
+                                01
+                            </span>
+
+                            <span class="achievement-label">
+                                CHAMPION
+                            </span>
+
+                            <h3>
+                                Tournament Name
+                            </h3>
+
+                            <div class="achievement-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    25 August 2026
+                                </span>
+
+                            </div>
+
+                            <p>
+                                Agility United secured first place
+                                after an intense competitive
+                                tournament. The team demonstrated
+                                strong teamwork, communication,
+                                and consistency throughout the
+                                competition.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================
+                         ACHIEVEMENT 02
+                    ================================== -->
+
+                    <article class="achievement-card">
+
+                        <div class="achievement-image">
+
+                            <img
+                                src="assets/achievement-02.jpeg"
+                                alt="Agility United Second Place Achievement"
+                            >
+
+                            <div class="achievement-rank">
+
+                                <i class="fa-solid fa-medal"></i>
+
+                                <span>
+                                    2ND PLACE
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="achievement-content">
+
+                            <span class="achievement-number">
+                                02
+                            </span>
+
+                            <span class="achievement-label">
+                                RUNNER UP
+                            </span>
+
+                            <h3>
+                                Tournament Name
+                            </h3>
+
+                            <div class="achievement-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    10 July 2026
+                                </span>
+
+                            </div>
+
+                            <p>
+                                A strong performance from the
+                                Agility United team resulted in
+                                a second-place finish. The
+                                tournament became an important
+                                experience for the team to learn
+                                and improve.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================
+                         ACHIEVEMENT 03
+                    ================================== -->
+
+                    <article class="achievement-card">
+
+                        <div class="achievement-image">
+
+                            <img
+                                src="assets/achievement-03.jpeg"
+                                alt="Agility United Third Place Achievement"
+                            >
+
+                            <div class="achievement-rank">
+
+                                <i class="fa-solid fa-medal"></i>
+
+                                <span>
+                                    3RD PLACE
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="achievement-content">
+
+                            <span class="achievement-number">
+                                03
+                            </span>
+
+                            <span class="achievement-label">
+                                TOP 3
+                            </span>
+
+                            <h3>
+                                Tournament Name
+                            </h3>
+
+                            <div class="achievement-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    20 June 2026
+                                </span>
+
+                            </div>
+
+                            <p>
+                                Agility United achieved a
+                                podium finish through strong
+                                coordination and determination.
+                                This achievement marked another
+                                important milestone in our
+                                competitive journey.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- =================================
+                         ACHIEVEMENT 04
+                    ================================== -->
+
+                    <article class="achievement-card">
+
+                        <div class="achievement-image">
+
+                            <img
+                                src="assets/achievement-04.jpeg"
+                                alt="Agility United Achievement"
+                            >
+
+                            <div class="achievement-rank">
+
+                                <i class="fa-solid fa-award"></i>
+
+                                <span>
+                                    TOP 8
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="achievement-content">
+
+                            <span class="achievement-number">
+                                04
+                            </span>
+
+                            <span class="achievement-label">
+                                COMPETITIVE
+                            </span>
+
+                            <h3>
+                                Tournament Name
+                            </h3>
+
+                            <div class="achievement-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    15 May 2026
+                                </span>
+
+                            </div>
+
+                            <p>
+                                The team successfully competed
+                                against strong opponents and
+                                reached the later stages of the
+                                tournament. The experience
+                                strengthened our competitive
+                                foundation.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             CTA
+        ====================================== -->
+
+        <section class="home-cta">
+
+            <div class="section-container">
+
+                <h2>
+                    READY TO
+                    <strong>RISE?</strong>
+                </h2>
+
+                <p>
+                    Explore our divisions and discover
+                    the teams behind our achievements.
+                </p>
+
+                <a
+                    href="divisions.html"
+                    class="btn btn-primary"
+                >
+
+                    Explore Divisions
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <img
+                    src="assets/logoagility.jpeg"
+                    alt="Agility United Logo"
+                >
+
+                <div class="footer-brand-text">
+
+                    <h3>
+                        AGILITY
+                        <span>UNITED</span>
+                    </h3>
+
+                    <p>
+                        GAMING COMMUNITY
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-tagline">
+
+                <p>
+                    Rise. Compete. Conquer.
+                </p>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <span class="footer-label">
+                    CONTACT
+                </span>
+
+                <h3>
+                    Get In Touch
+                </h3>
+
+                <p>
+                    Connect with Agility United
+                    and become part of our
+                    gaming community.
+                </p>
+
+
+                <div class="contact-links">
+
+                    <a
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                        <span>
+                            Instagram
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <i class="fa-brands fa-discord"></i>
+
+                        <span>
+                            Discord
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <i class="fa-brands fa-tiktok"></i>
+
+                        <span>
+                            TikTok
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Agility United.
+                All Rights Reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

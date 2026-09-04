@@ -1319,7 +1319,17 @@
         0.35s ease;
 
 }
+/* =========================================================
+   HIDE LEADER UNTIL OPEN
+========================================================= */
 
+.division-card:not(.open)
+.division-leader-section {
+
+    display:
+        none;
+
+}
 
 @keyframes divisionOpen {
 

@@ -1,12 +1,14 @@
 /* =========================================================
    AGILITY UNITED
    DIVISION SYSTEM
-========================================================= */
+   Google Sheets:
+   Nickname | ID | Role | Division
+   ========================================================= */
 
 
 /* =========================================================
    GOOGLE SHEETS
-========================================================= */
+   ========================================================= */
 
 const SHEET_URL =
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ93uw-1XWwiTKhTOrOPjlBEcxBkFLT_Ol1XYVEggT2ir1Z76HcoLtC15nm_eD_w8R8bWDO8yiOFrDQ/pub?output=csv";
@@ -14,35 +16,21 @@ const SHEET_URL =
 
 /* =========================================================
    CONTAINER
-========================================================= */
+   ========================================================= */
 
-const divisionContainer =
-    document.getElementById(
-        "divisions-container"
-    );
+let divisionContainer;
 
 
 /* =========================================================
    DIVISION LOGOS
-=========================================================
-
-   Upload logo ke folder:
-
-   assets/
-
-   dengan nama:
-
-   division-01.png
-   division-02.png
-   division-03.png
-   division-04.png
-   dst.
-
-========================================================= */
+   =========================================================
+   Nama harus sama dengan kolom Division
+   di Google Sheets.
+   ========================================================= */
 
 const DIVISION_LOGOS = {
 
-"AGILITY SHINIGAMI":
+    "AGILITY SHINIGAMI":
         "assets/divisi-shinigami.jpeg",
 
     "AGILITY PHOENIX":
@@ -64,34 +52,73 @@ const DIVISION_LOGOS = {
         "assets/divisi-wolves.jpeg",
 
     "AGILITY ECLIPSE":
-        "assets/divisi-eclipse.jpeg"
+        "assets/divisi-eclipse.jpeg",
 
+    "AGILITY EVOLUTION":
+        "assets/divisi-evolution.jpeg"
 };
 
 
+/* =========================================================
+   START
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        divisionContainer =
+            document.getElementById(
+                "divisions-container"
+            );
+
+
+        if (!divisionContainer) {
+
+            console.error(
+                "ERROR: #divisions-container tidak ditemukan."
+            );
+
+            return;
+        }
+
+
+        loadDivisions();
+
+    }
+);
+
 
 /* =========================================================
-   LOAD GOOGLE SHEETS
-========================================================= */
+   LOAD DIVISIONS
+   ========================================================= */
 
 async function loadDivisions() {
 
-    if (!divisionContainer) {
-
-        console.error(
-            "divisions-container tidak ditemukan."
-        );
-
-        return;
-
-    }
-
-
     try {
+
+        divisionContainer.innerHTML = `
+
+            <div class="division-loading">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <span>
+                    Loading division data...
+                </span>
+
+            </div>
+
+        `;
+
 
         const response =
             await fetch(
-                SHEET_URL
+                SHEET_URL,
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
             );
 
 
@@ -109,10 +136,9 @@ async function loadDivisions() {
 
 
         console.log(
-            "GOOGLE SHEETS RAW DATA:"
+            "GOOGLE SHEETS RAW DATA:",
+            csv
         );
-
-        console.log(csv);
 
 
         const rows =
@@ -129,18 +155,16 @@ async function loadDivisions() {
             );
 
             return;
-
         }
 
 
         /* =================================================
            HEADER
-        ================================================= */
+           ================================================= */
 
         const headers =
             rows[0].map(
-                header =>
-                    normalizeHeader(header)
+                normalizeHeader
             );
 
 
@@ -151,8 +175,8 @@ async function loadDivisions() {
 
 
         /* =================================================
-           FIND COLUMNS
-        ================================================= */
+           FIND COLUMN
+           ================================================= */
 
         const nicknameColumn =
             findColumn(
@@ -175,15 +199,6 @@ async function loadDivisions() {
             );
 
 
-        const divisionColumn =
-            findColumn(
-                headers,
-                [
-                    "division"
-                ]
-            );
-
-
         const roleColumn =
             findColumn(
                 headers,
@@ -194,11 +209,27 @@ async function loadDivisions() {
             );
 
 
+        const divisionColumn =
+            findColumn(
+                headers,
+                [
+                    "division"
+                ]
+            );
+
+
         /*
          * OPTIONAL
          *
-         * Jika kamu menambahkan kolom Leader,
-         * kode otomatis membacanya.
+         * Kalau nanti ditambahkan kolom:
+         *
+         * Leader
+         *
+         * kode akan membacanya.
+         *
+         * Jika tidak ada:
+         * member paling atas dalam division
+         * otomatis menjadi ketua.
          */
 
         const leaderColumn =
@@ -223,13 +254,13 @@ async function loadDivisions() {
         );
 
         console.log(
-            "DIVISION COLUMN:",
-            divisionColumn
+            "ROLE COLUMN:",
+            roleColumn
         );
 
         console.log(
-            "ROLE COLUMN:",
-            roleColumn
+            "DIVISION COLUMN:",
+            divisionColumn
         );
 
         console.log(
@@ -239,23 +270,32 @@ async function loadDivisions() {
 
 
         /* =================================================
-           VALIDATE DIVISION
-        ================================================= */
+           VALIDATE
+           ================================================= */
 
         if (!divisionColumn) {
 
             showError(
-                "Kolom Division tidak ditemukan."
+                "Kolom Division tidak ditemukan. Pastikan header bernama 'Division'."
             );
 
             return;
+        }
 
+
+        if (!nicknameColumn) {
+
+            showError(
+                "Kolom Nickname tidak ditemukan. Pastikan header bernama 'Nickname'."
+            );
+
+            return;
         }
 
 
         /* =================================================
            CONVERT DATA
-        ================================================= */
+           ================================================= */
 
         const members =
             rows
@@ -279,18 +319,20 @@ async function loadDivisions() {
                                     idColumn
                                 ),
 
-                            division:
-                                getValue(
-                                    row,
-                                    headers,
-                                    divisionColumn
-                                ),
-
                             role:
                                 getValue(
                                     row,
                                     headers,
                                     roleColumn
+                                ),
+
+                            division:
+                                normalizeDivision(
+                                    getValue(
+                                        row,
+                                        headers,
+                                        divisionColumn
+                                    )
                                 ),
 
                             leader:
@@ -299,16 +341,22 @@ async function loadDivisions() {
                                     headers,
                                     leaderColumn
                                 )
-
                         };
 
                     }
                 )
                 .filter(
-                    member =>
-                        member.nickname ||
-                        member.id ||
-                        member.division
+                    member => {
+
+                        return (
+                            member.division &&
+                            (
+                                member.nickname ||
+                                member.id
+                            )
+                        );
+
+                    }
                 );
 
 
@@ -318,28 +366,32 @@ async function loadDivisions() {
         );
 
 
+        /* =================================================
+           VALIDATE MEMBERS
+           ================================================= */
+
         if (
             members.length === 0
         ) {
 
             showError(
-                "Tidak ada data member."
+                "Tidak ada data member yang memiliki Division."
             );
 
             return;
-
         }
 
 
         /* =================================================
            RENDER
-        ================================================= */
+           ================================================= */
 
         renderDivisions(
             members
         );
 
     }
+
 
     catch (error) {
 
@@ -350,17 +402,16 @@ async function loadDivisions() {
 
 
         showError(
-            "Data Google Sheets tidak dapat dimuat."
+            "Data Google Sheets tidak dapat dimuat. Periksa link Google Sheets dan koneksi internet."
         );
 
     }
-
 }
 
 
 /* =========================================================
    NORMALIZE HEADER
-========================================================= */
+   ========================================================= */
 
 function normalizeHeader(
     value
@@ -375,32 +426,33 @@ function normalizeHeader(
             /\s+/g,
             " "
         );
-
 }
 
 
 /* =========================================================
    FIND COLUMN
-========================================================= */
+   ========================================================= */
 
 function findColumn(
     headers,
     names
 ) {
 
-    return headers.find(
-        header =>
-            names.includes(
-                header
-            )
-    ) || null;
+    return (
+        headers.find(
+            header =>
+                names.includes(
+                    header
+                )
+        ) || null
+    );
 
 }
 
 
 /* =========================================================
    GET VALUE
-========================================================= */
+   ========================================================= */
 
 function getValue(
     row,
@@ -421,9 +473,7 @@ function getValue(
         );
 
 
-    if (
-        index === -1
-    ) {
+    if (index === -1) {
 
         return "";
 
@@ -431,7 +481,7 @@ function getValue(
 
 
     return String(
-        row[index] || ""
+        row[index] ?? ""
     ).trim();
 
 }
@@ -439,70 +489,59 @@ function getValue(
 
 /* =========================================================
    NORMALIZE DIVISION
-========================================================= */
+   ========================================================= */
 
-function normalizeDivision(value) {
-
-    if (!value) {
-        return "";
-    }
-
-    return String(value)
-        .trim()
-        .replace(/\s+/g, " ");
-}
-
-
-/* =========================================================
-   FORMAT DIVISION
-========================================================= */
-
-function formatDivision(
+function normalizeDivision(
     value
 ) {
 
-    const number =
-        normalizeDivision(
-            value
-        );
-
-
-    if (!number) {
-
-        return "";
-
-    }
-
-
     return String(
-        number
-    ).padStart(
-        2,
-        "0"
-    );
+        value || ""
+    )
+        .trim()
+        .replace(
+            /\s+/g,
+            " "
+        )
+        .toUpperCase();
 
 }
 
 
 /* =========================================================
-   RENDER ALL DIVISIONS
-========================================================= */
+   RENDER DIVISIONS
+   ========================================================= */
 
 function renderDivisions(
     members
 ) {
 
-    divisionContainer.innerHTML =
-        "";
+    divisionContainer.innerHTML = "";
 
+
+    /*
+     * =====================================================
+     * GROUP MEMBER BERDASARKAN DIVISION
+     * =====================================================
+     *
+     * Contoh:
+     *
+     * AGILITY SHINIGAMI
+     *     RotzyArty
+     *     Smokuy
+     *     D'
+     *     Olise
+     *
+     * AGILITY EVOLUTION
+     *     IBU
+     *
+     * IBU TIDAK MASUK SHINIGAMI.
+     * =====================================================
+     */
 
     const divisions =
-        {};
+        new Map();
 
-
-    /* =====================================================
-       GROUP
-    ===================================================== */
 
     members.forEach(
         member => {
@@ -521,43 +560,31 @@ function renderDivisions(
 
 
             if (
-                !divisions[division]
+                !divisions.has(
+                    division
+                )
             ) {
 
-                divisions[division] =
-                    [];
+                divisions.set(
+                    division,
+                    []
+                );
 
             }
 
 
-            divisions[division].push(
-                member
-            );
+            divisions
+                .get(division)
+                .push(
+                    member
+                );
 
         }
     );
 
 
-    /* =====================================================
-       SORT
-    ===================================================== */
-
-    const divisionNumbers =
-        Object.keys(
-            divisions
-        ).sort(
-            (a, b) =>
-                Number(a) -
-                Number(b)
-        );
-
-
-    /* =====================================================
-       NO DATA
-    ===================================================== */
-
     if (
-        divisionNumbers.length === 0
+        divisions.size === 0
     ) {
 
         showError(
@@ -565,23 +592,32 @@ function renderDivisions(
         );
 
         return;
-
     }
 
 
-    /* =====================================================
-       CREATE CARDS
-    ===================================================== */
+    /*
+     * Nomor division mengikuti
+     * urutan division pertama kali
+     * muncul di Google Sheets.
+     */
 
-    divisionNumbers.forEach(
-        divisionNumber => {
+    let divisionIndex = 1;
+
+
+    divisions.forEach(
+        (
+            divisionMembers,
+            divisionName
+        ) => {
 
             createDivisionCard(
-                divisionNumber,
-                divisions[
-                    divisionNumber
-                ]
+                divisionName,
+                divisionMembers,
+                divisionIndex
             );
+
+
+            divisionIndex++;
 
         }
     );
@@ -591,43 +627,35 @@ function renderDivisions(
 
 /* =========================================================
    FIND LEADER
-========================================================= */
+   ========================================================= */
 
 function findLeader(
     members
 ) {
 
+    if (
+        !members ||
+        members.length === 0
+    ) {
+
+        return {};
+
+    }
+
+
     /*
-     * PRIORITY:
-     *
-     * 1. Leader = YES
-     * 2. Leader = TRUE
-     * 3. Leader = 1
-     * 4. Leader = Y
-     * 5. Leader = KETUA
-     * 6. MEMBER PERTAMA
-     *
-     * Karena Role kamu hanya:
-     *
-     * CB
-     * ST
-     * CM
-     * WF
-     * GK
-     *
-     * kita TIDAK memakai Role untuk
-     * menentukan ketua.
+     * =====================================================
+     * JIKA ADA KOLOM LEADER
+     * =====================================================
      */
 
-
-    const leader =
+    const markedLeader =
         members.find(
             member => {
 
                 const value =
                     String(
-                        member.leader ||
-                        ""
+                        member.leader || ""
                     )
                         .trim()
                         .toLowerCase();
@@ -653,37 +681,67 @@ function findLeader(
         );
 
 
+    if (markedLeader) {
+
+        return markedLeader;
+
+    }
+
+
     /*
-     * Jika belum ada kolom Leader,
-     * member pertama menjadi ketua.
+     * =====================================================
+     * JIKA TIDAK ADA KOLOM LEADER
+     *
+     * MEMBER PERTAMA PADA MASING-MASING DIVISION
+     * MENJADI KETUA.
+     *
+     * =====================================================
+     *
+     * SHINIGAMI:
+     *
+     * RotzyArty   ← KETUA
+     * Smokuy
+     * D'
+     * Olise
+     *
+     *
+     * EVOLUTION:
+     *
+     * IBU         ← KETUA
+     *
+     *
+     * IBU TIDAK AKAN MENJADI KETUA SHINIGAMI
+     * karena dia berada pada division berbeda.
      */
 
-    return (
-        leader ||
-        members[0] ||
-        {}
-    );
+    return members[0];
 
 }
 
 
 /* =========================================================
    CREATE DIVISION CARD
-========================================================= */
+   ========================================================= */
 
 function createDivisionCard(
-    divisionNumber,
-    members
+    divisionName,
+    members,
+    divisionIndex
 ) {
 
-    const formatted =
+    const formattedNumber =
         String(
-            divisionNumber
+            divisionIndex
         ).padStart(
             2,
             "0"
         );
 
+
+    /*
+     * Ketua hanya dicari
+     * dari member division ini.
+     */
 
     const leader =
         findLeader(
@@ -691,11 +749,16 @@ function createDivisionCard(
         );
 
 
+    /*
+     * Logo berdasarkan nama division.
+     */
+
     const logo =
         DIVISION_LOGOS[
-            formatted
-        ] ||
-        "";
+            normalizeDivision(
+                divisionName
+            )
+        ] || "";
 
 
     const card =
@@ -708,9 +771,9 @@ function createDivisionCard(
         "division-card";
 
 
-    /* =====================================================
-       CARD HTML
-    ===================================================== */
+    card.dataset.division =
+        divisionName;
+
 
     card.innerHTML = `
 
@@ -724,32 +787,54 @@ function createDivisionCard(
             aria-expanded="false"
         >
 
-            <div class="division-header-left">
-
+            <div
+                class="division-header-left"
+            >
 
                 <!-- LOGO -->
 
-                <div class="division-logo">
+                <div
+                    class="division-logo"
+                >
 
                     ${
                         logo
                             ? `
+
                                 <img
-                                    src="${logo}"
-                                    alt="Division ${formatted} Logo"
+                                    src="${escapeHTML(
+                                        logo
+                                    )}"
+                                    alt="${escapeHTML(
+                                        divisionName
+                                    )} Logo"
+
                                     onerror="
                                         this.style.display='none';
-                                        this.nextElementSibling.style.display='flex';
+
+                                        const fallback =
+                                            this.parentElement.querySelector(
+                                                '.division-logo-fallback'
+                                            );
+
+                                        if (fallback) {
+                                            fallback.style.display='flex';
+                                        }
                                     "
                                 >
 
                                 <i
-                                    class="fa-solid fa-shield-halved"
+                                    class="fa-solid fa-shield-halved division-logo-fallback"
                                     style="display:none;"
                                 ></i>
+
                             `
                             : `
-                                <i class="fa-solid fa-shield-halved"></i>
+
+                                <i
+                                    class="fa-solid fa-shield-halved"
+                                ></i>
+
                             `
                     }
 
@@ -758,29 +843,37 @@ function createDivisionCard(
 
                 <!-- INFO -->
 
-                <div class="division-info">
+                <div
+                    class="division-info"
+                >
 
-                    <span class="division-number">
-
-                        DIVISION ${formatted}
-
+                    <span
+                        class="division-number"
+                    >
+                        DIVISION ${formattedNumber}
                     </span>
 
 
-                    <h3 class="division-name">
-
+                    <h3
+                        class="division-name"
+                    >
                         ${escapeHTML(
-                           members[0].division ||
-                           "UNKNOWN DIVISION"
+                            divisionName
                         )}
                     </h3>
 
 
-
-                    <p class="division-description">
+                    <p
+                        class="division-description"
+                    >
 
                         ${members.length}
-                        ${members.length === 1 ? "MEMBER" : "MEMBERS"}
+
+                        ${
+                            members.length === 1
+                                ? "MEMBER"
+                                : "MEMBERS"
+                        }
 
                     </p>
 
@@ -789,15 +882,19 @@ function createDivisionCard(
             </div>
 
 
-
             <!-- RIGHT -->
 
-            <div class="division-header-right">
+            <div
+                class="division-header-right"
+            >
 
+                <span
+                    class="division-member-count"
+                >
 
-                <span class="division-member-count">
-
-                    <i class="fa-solid fa-users"></i>
+                    <i
+                        class="fa-solid fa-users"
+                    ></i>
 
                     ${members.length}
 
@@ -810,9 +907,13 @@ function createDivisionCard(
                 </span>
 
 
-                <span class="division-arrow">
+                <span
+                    class="division-arrow"
+                >
 
-                    <i class="fa-solid fa-chevron-down"></i>
+                    <i
+                        class="fa-solid fa-chevron-down"
+                    ></i>
 
                 </span>
 
@@ -821,17 +922,21 @@ function createDivisionCard(
         </button>
 
 
-
         <!-- =========================================
              LEADER
         ========================================== -->
 
-        <div class="division-leader-section">
+        <div
+            class="division-leader-section"
+        >
 
+            <div
+                class="division-leader-heading"
+            >
 
-            <div class="division-leader-heading">
-
-                <i class="fa-solid fa-crown"></i>
+                <i
+                    class="fa-solid fa-crown"
+                ></i>
 
                 <span>
                     KETUA DIVISI
@@ -840,17 +945,24 @@ function createDivisionCard(
             </div>
 
 
-            <div class="division-leader-card">
+            <div
+                class="division-leader-card"
+            >
 
+                <div
+                    class="division-leader-avatar"
+                >
 
-                <div class="division-leader-avatar">
-
-                    <i class="fa-solid fa-user"></i>
+                    <i
+                        class="fa-solid fa-user"
+                    ></i>
 
                 </div>
 
 
-                <div class="division-leader-info">
+                <div
+                    class="division-leader-info"
+                >
 
                     <span>
                         DIVISION LEADER
@@ -870,6 +982,7 @@ function createDivisionCard(
                     <p>
 
                         ID:
+
                         ${escapeHTML(
                             leader.id ||
                             "-"
@@ -880,7 +993,9 @@ function createDivisionCard(
                 </div>
 
 
-                <div class="division-leader-role">
+                <div
+                    class="division-leader-role"
+                >
 
                     ${escapeHTML(
                         leader.role ||
@@ -894,19 +1009,25 @@ function createDivisionCard(
         </div>
 
 
-
         <!-- =========================================
              MEMBERS
         ========================================== -->
 
-        <div class="division-members">
+        <div
+            class="division-members"
+        >
 
+            <div
+                class="members-panel-top"
+            >
 
-            <div class="members-panel-top">
+                <div
+                    class="members-panel-title"
+                >
 
-                <div class="members-panel-title">
-
-                    <i class="fa-solid fa-users"></i>
+                    <i
+                        class="fa-solid fa-users"
+                    ></i>
 
                     TEAM MEMBERS
 
@@ -915,9 +1036,13 @@ function createDivisionCard(
             </div>
 
 
-            <div class="members-table-wrapper">
+            <div
+                class="members-table-wrapper"
+            >
 
-                <table class="members-table">
+                <table
+                    class="members-table"
+                >
 
                     <thead>
 
@@ -968,7 +1093,7 @@ function createDivisionCard(
 
     /* =====================================================
        CLICK
-    ===================================================== */
+       ===================================================== */
 
     const header =
         card.querySelector(
@@ -976,31 +1101,35 @@ function createDivisionCard(
         );
 
 
-    header.addEventListener(
-        "click",
-        event => {
+    if (header) {
 
-            event.stopPropagation();
+        header.addEventListener(
+            "click",
+            event => {
+
+                event.preventDefault();
+
+                event.stopPropagation();
 
 
-            const isOpen =
-                card.classList.toggle(
-                    "open"
+                const isOpen =
+                    card.classList.toggle(
+                        "open"
+                    );
+
+
+                header.setAttribute(
+                    "aria-expanded",
+                    String(
+                        isOpen
+                    )
                 );
 
+            }
+        );
 
-            header.setAttribute(
-                "aria-expanded",
-                isOpen
-            );
+    }
 
-        }
-    );
-
-
-    /* =====================================================
-       APPEND
-    ===================================================== */
 
     divisionContainer.appendChild(
         card
@@ -1011,16 +1140,47 @@ function createDivisionCard(
 
 /* =========================================================
    CREATE MEMBER ROWS
-========================================================= */
+   ========================================================= */
 
 function createMemberRows(
     members,
     leader
 ) {
 
+    if (
+        !members ||
+        members.length === 0
+    ) {
+
+        return `
+
+            <tr>
+
+                <td
+                    colspan="5"
+                    class="members-empty"
+                >
+                    Tidak ada member.
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    /*
+     * SEMUA member dari division
+     * akan ditampilkan.
+     */
+
     return members
         .map(
-            (member, index) => {
+            (
+                member,
+                index
+            ) => {
 
                 const isLeader =
                     member === leader;
@@ -1030,7 +1190,11 @@ function createMemberRows(
 
                     <tr>
 
-                        <td class="member-index">
+                        <!-- NUMBER -->
+
+                        <td
+                            class="member-index"
+                        >
 
                             ${String(
                                 index + 1
@@ -1042,13 +1206,23 @@ function createMemberRows(
                         </td>
 
 
-                        <td class="member-nickname">
+                        <!-- NICKNAME -->
 
-                            <div class="member-name-cell">
+                        <td
+                            class="member-nickname"
+                        >
 
-                                <div class="member-photo-placeholder">
+                            <div
+                                class="member-name-cell"
+                            >
 
-                                    <i class="fa-solid fa-user"></i>
+                                <div
+                                    class="member-photo-placeholder"
+                                >
+
+                                    <i
+                                        class="fa-solid fa-user"
+                                    ></i>
 
                                 </div>
 
@@ -1067,7 +1241,11 @@ function createMemberRows(
                         </td>
 
 
-                        <td class="member-game-id">
+                        <!-- GAME ID -->
+
+                        <td
+                            class="member-game-id"
+                        >
 
                             ${escapeHTML(
                                 member.id ||
@@ -1077,9 +1255,13 @@ function createMemberRows(
                         </td>
 
 
+                        <!-- ROLE -->
+
                         <td>
 
-                            <span class="member-role">
+                            <span
+                                class="member-role"
+                            >
 
                                 ${escapeHTML(
                                     member.role ||
@@ -1091,25 +1273,37 @@ function createMemberRows(
                         </td>
 
 
+                        <!-- STATUS -->
+
                         <td>
 
                             ${
                                 isLeader
                                     ? `
-                                        <span class="member-status leader-status">
 
-                                            <i class="fa-solid fa-crown"></i>
+                                        <span
+                                            class="member-status leader-status"
+                                        >
+
+                                            <i
+                                                class="fa-solid fa-crown"
+                                            ></i>
 
                                             KETUA
 
                                         </span>
+
                                     `
                                     : `
-                                        <span class="member-status">
+
+                                        <span
+                                            class="member-status"
+                                        >
 
                                             MEMBER
 
                                         </span>
+
                                     `
                             }
 
@@ -1128,14 +1322,14 @@ function createMemberRows(
 
 /* =========================================================
    ESCAPE HTML
-========================================================= */
+   ========================================================= */
 
 function escapeHTML(
     value
 ) {
 
     return String(
-        value || ""
+        value ?? ""
     )
         .replace(
             /&/g,
@@ -1163,7 +1357,7 @@ function escapeHTML(
 
 /* =========================================================
    CSV PARSER
-========================================================= */
+   ========================================================= */
 
 function parseCSV(
     text
@@ -1192,7 +1386,9 @@ function parseCSV(
             text[i + 1];
 
 
-        /* QUOTES */
+        /* =================================================
+           DOUBLE QUOTES
+           ================================================= */
 
         if (
             char === '"' &&
@@ -1208,6 +1404,10 @@ function parseCSV(
         }
 
 
+        /* =================================================
+           QUOTE
+           ================================================= */
+
         if (
             char === '"'
         ) {
@@ -1220,7 +1420,9 @@ function parseCSV(
         }
 
 
-        /* COMMA */
+        /* =================================================
+           COMMA
+           ================================================= */
 
         if (
             char === "," &&
@@ -1238,7 +1440,9 @@ function parseCSV(
         }
 
 
-        /* NEW LINE */
+        /* =================================================
+           NEW LINE
+           ================================================= */
 
         if (
             (
@@ -1282,7 +1486,9 @@ function parseCSV(
     }
 
 
-    /* LAST ROW */
+    /* =====================================================
+       LAST ROW
+       ===================================================== */
 
     if (
         value !== "" ||
@@ -1326,17 +1532,30 @@ function parseCSV(
 
 /* =========================================================
    ERROR
-========================================================= */
+   ========================================================= */
 
 function showError(
     message
 ) {
 
+    if (
+        !divisionContainer
+    ) {
+
+        return;
+
+    }
+
+
     divisionContainer.innerHTML = `
 
-        <div class="division-error">
+        <div
+            class="division-error"
+        >
 
-            <i class="fa-solid fa-triangle-exclamation"></i>
+            <i
+                class="fa-solid fa-triangle-exclamation"
+            ></i>
 
 
             <h3>
@@ -1345,14 +1564,22 @@ function showError(
 
 
             <p>
+
                 ${escapeHTML(
                     message
                 )}
+
             </p>
 
 
             <small>
-                Periksa Google Sheets dan struktur kolomnya.
+
+                Pastikan Google Sheets sudah
+                dipublish sebagai CSV dan
+                header-nya adalah:
+
+                Nickname, ID, Role, Division.
+
             </small>
 
         </div>
@@ -1360,10 +1587,3 @@ function showError(
     `;
 
 }
-
-
-/* =========================================================
-   START
-========================================================= */
-
-loadDivisions();

@@ -764,9 +764,12 @@ function createDivisionCard(
 
                     <h3 class="division-name">
 
-                        AGILITY UNITED ${formatted}
-
+                        ${escapeHTML(
+                           members[0].division ||
+                           "UNKNOWN DIVISION"
+                        )}
                     </h3>
+
 
 
                     <p class="division-description">

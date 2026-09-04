@@ -1,399 +1,255 @@
-/* =====================================================
-   AGILITY UNITED
-   DIVISION SYSTEM
-===================================================== */
-
-
-/* =====================================================
-   GOOGLE SHEETS CONFIGURATION
-===================================================== */
-
-
-/*
-    MASUKKAN LINK CSV GOOGLE SHEETS DI SINI.
-
-    Contoh:
-
-    https://docs.google.com/spreadsheets/d/XXXXXXXX/export?format=csv&gid=0
-
-*/
-
 const SHEET_URL =
-    "PASTE_YOUR_GOOGLE_SHEET_CSV_LINK_HERE";
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ93uw-1XWwiTKhTOrOPjlBEcxBkFLT_Ol1XYVEggT2ir1Z76HcoLtC15nm_eD_w8R8bWDO8yiOFrDQ/pub?output=csv";
+
+const divisionContainer =
+    document.getElementById("divisions-container");
 
 
+async function loadDivisions() {
 
-/* =====================================================
-   DIVISION CONFIGURATION
-===================================================== */
+    try {
 
-const divisions = [
+        const response = await fetch(SHEET_URL);
 
-    {
-        number: "DIVISION 01",
-        name: "AGILITY EVOLUTION",
+        const csv = await response.text();
 
-        logo: "assets/divisions/evolution.png",
+        const rows = parseCSV(csv);
 
-        description:
-            "Agility Evolution competitive division."
+        if (rows.length < 2) {
+            divisionContainer.innerHTML =
+                "<p>No member data available.</p>";
+            return;
+        }
 
-    },
+        const headers = rows[0];
 
-    {
-        number: "DIVISION 02",
-        name: "AGILITY UNITED 02",
+        const members = rows.slice(1).map(row => {
 
-        logo: "assets/divisions/division02.png",
+            const member = {};
 
-        description:
-            "Agility United competitive division."
+            headers.forEach((header, index) => {
+                member[header.trim()] =
+                    row[index]?.trim() || "";
+            });
 
-    },
+            return member;
 
-    {
-        number: "DIVISION 03",
-        name: "AGILITY UNITED 03",
+        });
 
-        logo: "assets/divisions/division03.png",
+        renderDivisions(members);
 
-        description:
-            "Agility United competitive division."
+    } catch (error) {
 
-    },
-
-    {
-        number: "DIVISION 04",
-        name: "AGILITY UNITED 04",
-
-        logo: "assets/divisions/division04.png",
-
-        description:
-            "Agility United competitive division."
-
-    },
-
-    {
-        number: "DIVISION 05",
-        name: "AGILITY UNITED 05",
-
-        logo: "assets/divisions/division05.png",
-
-        description:
-            "Agility United competitive division."
-
-    },
-
-    {
-        number: "DIVISION 06",
-        name: "AGILITY UNITED 06",
-
-        logo: "assets/divisions/division06.png",
-
-        description:
-            "Agility United competitive division."
-
-    },
-
-    {
-        number: "DIVISION 07",
-        name: "AGILITY UNITED 07",
-
-        logo: "assets/divisions/division07.png",
-
-        description:
-            "Agility United competitive division."
-
-    },
-
-    {
-        number: "DIVISION 08",
-        name: "AGILITY UNITED 08",
-
-        logo: "assets/divisions/division08.png",
-
-        description:
-            "Agility United competitive division."
-
-    }
-
-];
-
-
-
-/* =====================================================
-   GLOBAL DATA
-===================================================== */
-
-let membersData = [];
-
-
-
-/* =====================================================
-   INITIALIZE
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        renderDivisions();
-
-        loadMembers();
-
-    }
-);
-
-
-
-/* =====================================================
-   RENDER DIVISIONS
-===================================================== */
-
-function renderDivisions() {
-
-    const container =
-        document.getElementById(
-            "division-list"
+        console.error(
+            "Failed to load Google Sheet:",
+            error
         );
 
+        divisionContainer.innerHTML = `
+            <p class="division-error">
+                Failed to load division data.
+            </p>
+        `;
 
-    if (!container) {
-        return;
     }
-
-
-    container.innerHTML = "";
-
-
-    divisions.forEach(
-        (division, index) => {
-
-            const card =
-                createDivisionCard(
-                    division,
-                    index
-                );
-
-
-            container.appendChild(card);
-
-        }
-    );
 
 }
+const SHEET_URL =
+    "MASUKKAN_LINK_GOOGLE_SHEET_DI_SINI";
+
+const divisionContainer =
+    document.getElementById("divisions-container");
 
 
+async function loadDivisions() {
 
-/* =====================================================
-   CREATE DIVISION CARD
-===================================================== */
+    try {
 
-function createDivisionCard(
-    division,
-    index
-) {
+        const response = await fetch(SHEET_URL);
 
-    const card =
-        document.createElement(
-            "article"
+        const csv = await response.text();
+
+        const rows = parseCSV(csv);
+
+        if (rows.length < 2) {
+            divisionContainer.innerHTML =
+                "<p>No member data available.</p>";
+            return;
+        }
+
+        const headers = rows[0];
+
+        const members = rows.slice(1).map(row => {
+
+            const member = {};
+
+            headers.forEach((header, index) => {
+                member[header.trim()] =
+                    row[index]?.trim() || "";
+            });
+
+            return member;
+
+        });
+
+        renderDivisions(members);
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load Google Sheet:",
+            error
         );
 
+        divisionContainer.innerHTML = `
+            <p class="division-error">
+                Failed to load division data.
+            </p>
+        `;
 
-    card.className =
-        "division-card";
+    }
+
+}
+function renderDivisions(members) {
+
+    divisionContainer.innerHTML = "";
+
+    const divisions = {};
+
+    members.forEach(member => {
+
+        const division =
+            member.Division;
+
+        if (!division) return;
+
+        if (!divisions[division]) {
+            divisions[division] = [];
+        }
+
+        divisions[division].push(member);
+
+    });
 
 
-    card.dataset.division =
-        division.name;
+    Object.keys(divisions)
+        .sort((a, b) => Number(a) - Number(b))
+        .forEach(divisionNumber => {
+
+            const divisionMembers =
+                divisions[divisionNumber];
+
+            createDivisionCard(
+                divisionNumber,
+                divisionMembers
+            );
+
+        });
+
+}
+function createDivisionCard(
+    divisionNumber,
+    members
+) {
+
+    const leader =
+        members.find(
+            member =>
+                member.Position?.toLowerCase() === "leader"
+        ) || members[0];
+
+
+    const card =
+        document.createElement("div");
+
+    card.className = "division-card";
 
 
     card.innerHTML = `
 
-        <button
-            type="button"
-            class="division-header"
-            aria-expanded="false"
-        >
+        <div class="division-header">
 
-            <div
-                class="division-header-left"
-            >
+            <div>
 
-                <div class="division-logo">
+                <span class="division-number">
+                    DIVISION ${String(divisionNumber).padStart(2, "0")}
+                </span>
 
-                    <img
-                        src="${division.logo}"
-                        alt="${division.name} Logo"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                    >
+                <h3>
+                    AGILITY UNITED ${String(divisionNumber).padStart(2, "0")}
+                </h3>
 
-                    <i
-                        class="fa-solid fa-users"
-                        style="display:none;"
-                    ></i>
+            </div>
 
-                </div>
+            <div class="division-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+        </div>
 
 
-                <div class="division-info">
+        <div class="division-leader">
 
-                    <span class="division-number">
-                        ${division.number}
-                    </span>
+            <div class="division-leader-title">
 
-                    <h3 class="division-name">
-                        ${division.name}
-                    </h3>
+                <i class="fa-solid fa-user-tie"></i>
 
-                    <p class="division-description">
-                        ${division.description}
-                    </p>
-
-                </div>
+                DIVISION LEADER
 
             </div>
 
 
-            <div
-                class="division-header-right"
-            >
+            <div class="leader-profile">
 
-                <span
-                    class="division-member-count"
-                >
+                <div class="leader-avatar">
 
-                    <i
-                        class="fa-solid fa-users"
-                    ></i>
+                    <i class="fa-solid fa-user"></i>
 
-                    <span class="count-value">
-                        0 MEMBERS
-                    </span>
-
-                </span>
+                </div>
 
 
-                <span class="division-arrow">
+                <div class="leader-details">
 
-                    <i
-                        class="fa-solid fa-chevron-down"
-                    ></i>
-
-                </span>
-
-            </div>
-
-        </button>
-
-
-        <div
-            class="division-members"
-        >
-
-            <div
-                class="members-panel-top"
-            >
-
-                <div
-                    class="members-panel-title"
-                >
-
-                    <i
-                        class="fa-solid fa-user-group"
-                    ></i>
+                    <h4>
+                        ${leader.Nickname || "UNKNOWN"}
+                    </h4>
 
                     <span>
-                        DIVISION MEMBERS
+                        GAME ID :
+                        <strong>
+                            ${leader["Game ID"] || "-"}
+                        </strong>
                     </span>
 
                 </div>
 
 
-                <div
-                    class="member-search"
-                >
+                <div class="role-badge">
 
-                    <i
-                        class="fa-solid fa-magnifying-glass"
-                    ></i>
-
-                    <input
-                        type="text"
-                        placeholder="Search member..."
-                        data-search="${index}"
-                    >
+                    ${leader.Role || "-"}
 
                 </div>
 
             </div>
 
-
-            <div
-                class="members-table-wrapper"
-            >
-
-                <table
-                    class="members-table"
-                >
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-                                NO
-                            </th>
-
-                            <th>
-                                MEMBER
-                            </th>
-
-                            <th>
-                                GAME ID
-                            </th>
-
-                            <th>
-                                ROLE
-                            </th>
-
-                        </tr>
-
-                    </thead>
+        </div>
 
 
-                    <tbody
-                        class="members-body"
-                    >
+        <div class="division-members">
 
-                        <tr>
+            <div class="members-title">
 
-                            <td
-                                colspan="4"
-                                style="text-align:center;"
-                            >
+                <i class="fa-solid fa-users"></i>
 
-                                <div
-                                    class="division-loading"
-                                >
+                TEAM MEMBERS
 
-                                    <div
-                                        class="loading-spinner"
-                                    ></div>
+            </div>
 
-                                    <span>
-                                        Loading members...
-                                    </span>
+            <div class="members-list">
 
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
+                ${createMemberList(members)}
 
             </div>
 
@@ -402,814 +258,71 @@ function createDivisionCard(
     `;
 
 
-    const header =
-        card.querySelector(
-            ".division-header"
-        );
-
-
-    const search =
-        card.querySelector(
-            ".member-search input"
-        );
-
-
-    header.addEventListener(
+    card.addEventListener(
         "click",
         () => {
 
-            toggleDivision(card);
+            card.classList.toggle("expanded");
 
         }
     );
 
 
-    search.addEventListener(
-        "input",
-        () => {
-
-            renderMembers(
-                card,
-                search.value
-            );
-
-        }
-    );
-
-
-    return card;
+    divisionContainer.appendChild(card);
 
 }
+function createMemberList(members) {
 
+    return members.map(member => `
 
+        <div class="member-row">
 
-/* =====================================================
-   TOGGLE DIVISION
-===================================================== */
+            <div class="member-avatar">
 
-function toggleDivision(card) {
+                <i class="fa-solid fa-user"></i>
 
-    const isOpen =
-        card.classList.contains(
-            "open"
-        );
+            </div>
 
+            <div class="member-data">
 
-    card.classList.toggle(
-        "open"
-    );
+                <strong>
+                    ${member.Nickname || "-"}
+                </strong>
 
+                <span>
+                    GAME ID :
+                    ${member["Game ID"] || "-"}
+                </span>
 
-    const header =
-        card.querySelector(
-            ".division-header"
-        );
+            </div>
 
+            <div class="member-role">
 
-    header.setAttribute(
-        "aria-expanded",
-        !isOpen
-    );
+                ${member.Role || "-"}
 
+            </div>
 
-    /*
-        Kalau dibuka,
-        render ulang data member.
-    */
+        </div>
 
-    if (!isOpen) {
-
-        renderMembers(card);
-
-    }
+    `).join("");
 
 }
+function parseCSV(text) {
 
+    const lines =
+        text.trim().split("\n");
 
+    return lines.map(line => {
 
-/* =====================================================
-   LOAD GOOGLE SHEETS
-===================================================== */
-
-async function loadMembers() {
-
-    const container =
-        document.getElementById(
-            "division-list"
-        );
-
-
-    /*
-        Kalau URL belum diganti
-    */
-
-    if (
-        !SHEET_URL ||
-        SHEET_URL.includes(
-            "PASTE_YOUR_GOOGLE"
-        )
-    ) {
-
-        showSheetWarning();
-
-        return;
-
-    }
-
-
-    try {
-
-        const response =
-            await fetch(
-                SHEET_URL
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Google Sheets could not be loaded."
-            );
-
-        }
-
-
-        const csv =
-            await response.text();
-
-
-        membersData =
-            parseCSV(csv);
-
-
-        normalizeMembers();
-
-
-        updateMemberCounts();
-
-
-        /*
-            Render jika ada card
-            yang sedang terbuka.
-        */
-
-        document
-            .querySelectorAll(
-                ".division-card.open"
-            )
-            .forEach(
-                card => {
-
-                    renderMembers(card);
-
-                }
-            );
-
-
-    } catch (error) {
-
-        console.error(
-            "Google Sheets Error:",
-            error
-        );
-
-
-        showSheetError();
-
-    }
-
-}
-
-
-
-/* =====================================================
-   PARSE CSV
-===================================================== */
-
-function parseCSV(csv) {
-
-    const rows = [];
-
-    let row = [];
-
-    let value = "";
-
-    let insideQuotes = false;
-
-
-    for (
-        let i = 0;
-        i < csv.length;
-        i++
-    ) {
-
-        const char =
-            csv[i];
-
-
-        const next =
-            csv[i + 1];
-
-
-        if (
-            char === '"' &&
-            insideQuotes &&
-            next === '"'
-        ) {
-
-            value += '"';
-
-            i++;
-
-            continue;
-
-        }
-
-
-        if (char === '"') {
-
-            insideQuotes =
-                !insideQuotes;
-
-            continue;
-
-        }
-
-
-        if (
-            char === "," &&
-            !insideQuotes
-        ) {
-
-            row.push(
-                value.trim()
-            );
-
-            value = "";
-
-            continue;
-
-        }
-
-
-        if (
-            (
-                char === "\n" ||
-                char === "\r"
-            ) &&
-            !insideQuotes
-        ) {
-
-            if (
-                char === "\r" &&
-                next === "\n"
-            ) {
-
-                i++;
-
-            }
-
-
-            row.push(
-                value.trim()
-            );
-
-            value = "";
-
-
-            if (
-                row.some(
-                    cell =>
-                        cell !== ""
-                )
-            ) {
-
-                rows.push(row);
-
-            }
-
-
-            row = [];
-
-            continue;
-
-        }
-
-
-        value += char;
-
-    }
-
-
-    if (value !== "" || row.length) {
-
-        row.push(
-            value.trim()
-        );
-
-        rows.push(row);
-
-    }
-
-
-    if (!rows.length) {
-
-        return [];
-
-    }
-
-
-    const headers =
-        rows[0].map(
-            header =>
-                header
-                    .toLowerCase()
+        return line
+            .split(",")
+            .map(value =>
+                value
+                    .replace(/^"|"$/g, "")
                     .trim()
-        );
-
-
-    return rows
-        .slice(1)
-        .map(row => {
-
-            const object = {};
-
-
-            headers.forEach(
-                (header, index) => {
-
-                    object[header] =
-                        (
-                            row[index] ||
-                            ""
-                        ).trim();
-
-                }
             );
 
-
-            return object;
-
-        });
+    });
 
 }
-
-
-
-/* =====================================================
-   NORMALIZE MEMBERS
-===================================================== */
-
-function normalizeMembers() {
-
-    membersData =
-        membersData
-            .filter(
-                member => {
-
-                    return (
-                        member.division ||
-                        member.team
-                    );
-
-                }
-            )
-            .map(
-                member => {
-
-                    return {
-
-                        division:
-                            (
-                                member.division ||
-                                member.team ||
-                                ""
-                            )
-                            .trim(),
-
-                        nickname:
-                            (
-                                member.nickname ||
-                                member.name ||
-                                member.player ||
-                                ""
-                            )
-                            .trim(),
-
-                        gameid:
-                            (
-                                member.gameid ||
-                                member.game_id ||
-                                member.id ||
-                                ""
-                            )
-                            .trim(),
-
-                        role:
-                            (
-                                member.role ||
-                                "PLAYER"
-                            )
-                            .trim(),
-
-                        photo:
-                            (
-                                member.photo ||
-                                member.image ||
-                                ""
-                            )
-                            .trim()
-
-                    };
-
-                }
-            );
-
-}
-
-
-
-/* =====================================================
-   GET MEMBERS FOR DIVISION
-===================================================== */
-
-function getDivisionMembers(
-    divisionName
-) {
-
-    const target =
-        normalizeText(
-            divisionName
-        );
-
-
-    return membersData.filter(
-        member => {
-
-            return (
-                normalizeText(
-                    member.division
-                ) === target
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   NORMALIZE TEXT
-===================================================== */
-
-function normalizeText(text) {
-
-    return String(text || "")
-        .toLowerCase()
-        .trim()
-        .replace(
-            /\s+/g,
-            " "
-        );
-
-}
-
-
-
-/* =====================================================
-   UPDATE MEMBER COUNTS
-===================================================== */
-
-function updateMemberCounts() {
-
-    document
-        .querySelectorAll(
-            ".division-card"
-        )
-        .forEach(card => {
-
-            const divisionName =
-                card.dataset.division;
-
-
-            const members =
-                getDivisionMembers(
-                    divisionName
-                );
-
-
-            const count =
-                card.querySelector(
-                    ".count-value"
-                );
-
-
-            if (count) {
-
-                count.textContent =
-                    `${members.length} MEMBERS`;
-
-            }
-
-        });
-
-}
-
-
-
-/* =====================================================
-   RENDER MEMBERS
-===================================================== */
-
-function renderMembers(
-    card,
-    searchTerm = ""
-) {
-
-    const divisionName =
-        card.dataset.division;
-
-
-    const tbody =
-        card.querySelector(
-            ".members-body"
-        );
-
-
-    if (!tbody) {
-        return;
-    }
-
-
-    let members =
-        getDivisionMembers(
-            divisionName
-        );
-
-
-    /*
-        SEARCH
-    */
-
-    const search =
-        normalizeText(
-            searchTerm
-        );
-
-
-    if (search) {
-
-        members =
-            members.filter(
-                member => {
-
-                    return (
-
-                        normalizeText(
-                            member.nickname
-                        ).includes(search)
-
-                        ||
-
-                        normalizeText(
-                            member.gameid
-                        ).includes(search)
-
-                        ||
-
-                        normalizeText(
-                            member.role
-                        ).includes(search)
-
-                    );
-
-                }
-            );
-
-    }
-
-
-    /*
-        EMPTY
-    */
-
-    if (!members.length) {
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td colspan="4">
-
-                    <div
-                        class="members-empty"
-                    >
-
-                        <i
-                            class="fa-solid fa-user-slash"
-                        ></i>
-
-                        <p>
-                            No members found
-                        </p>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-        `;
-
-        return;
-
-    }
-
-
-    /*
-        MEMBER ROWS
-    */
-
-    tbody.innerHTML =
-        members
-            .map(
-                (member, index) => {
-
-                    return `
-
-                        <tr>
-
-                            <td
-                                class="member-index"
-                            >
-                                ${String(
-                                    index + 1
-                                ).padStart(
-                                    2,
-                                    "0"
-                                )}
-                            </td>
-
-
-                            <td>
-
-                                <span
-                                    class="member-nickname"
-                                >
-                                    ${escapeHTML(
-                                        member.nickname
-                                    )}
-                                </span>
-
-                            </td>
-
-
-                            <td
-                                class="member-game-id"
-                            >
-                                ${escapeHTML(
-                                    member.gameid ||
-                                    "-"
-                                )}
-                            </td>
-
-
-                            <td>
-
-                                <span
-                                    class="member-role"
-                                >
-                                    ${escapeHTML(
-                                        member.role ||
-                                        "PLAYER"
-                                    )}
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-                    `;
-
-                }
-            )
-            .join("");
-
-}
-
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(text) {
-
-    return String(text || "")
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-
-/* =====================================================
-   GOOGLE SHEET WARNING
-===================================================== */
-
-function showSheetWarning() {
-
-    const container =
-        document.getElementById(
-            "division-list"
-        );
-
-
-    if (!container) {
-        return;
-    }
-
-
-    /*
-        Tetap tampilkan division.
-        Hanya member yang belum tersedia.
-    */
-
-    updateMemberCounts();
-
-
-    console.warn(
-        "Google Sheets URL has not been configured."
-    );
-
-}
-
-
-
-/* =====================================================
-   GOOGLE SHEET ERROR
-===================================================== */
-
-function showSheetError() {
-
-    document
-        .querySelectorAll(
-            ".members-body"
-        )
-        .forEach(
-            tbody => {
-
-                tbody.innerHTML = `
-
-                    <tr>
-
-                        <td colspan="4">
-
-                            <div
-                                class="division-error"
-                            >
-
-                                <i
-                                    class="fa-solid fa-triangle-exclamation"
-                                ></i>
-
-                                <p>
-                                    Unable to load member data.
-                                </p>
-
-                                <small>
-                                    Please check your Google Sheets
-                                    connection and sharing settings.
-                                </small>
-
-                            </div>
-
-                        </td>
-
-                    </tr>
-
-                `;
-
-            }
-        );
-
-}
+loadDivisions();

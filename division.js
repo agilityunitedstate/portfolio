@@ -436,37 +436,15 @@ function getValue(
    NORMALIZE DIVISION
 ========================================================= */
 
-function normalizeDivision(
-    value
-) {
+function normalizeDivision(value) {
 
     if (!value) {
-
         return "";
-
     }
 
-
-    const match =
-        String(value).match(
-            /\d+/
-        );
-
-
-    if (!match) {
-
-        return "";
-
-    }
-
-
-    return String(
-        parseInt(
-            match[0],
-            10
-        )
-    );
-
+    return String(value)
+        .trim()
+        .replace(/\s+/g, " ");
 }
 
 

@@ -2235,3 +2235,939 @@ td:nth-child(3) {
     }
 
 }
+/* =====================================
+   AGILITY UNITED
+   DIVISIONS PAGE
+===================================== */
+
+.division-hero {
+    min-height: 55vh;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 150px 25px 90px;
+
+    background:
+        linear-gradient(
+            rgba(8, 8, 8, 0.78),
+            rgba(8, 8, 8, 0.96)
+        ),
+        radial-gradient(
+            circle at center,
+            rgba(255, 107, 0, 0.18),
+            transparent 55%
+        );
+
+    overflow: hidden;
+}
+
+
+/* GRID EFFECT */
+
+.division-hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    opacity: 0.45;
+
+    pointer-events: none;
+}
+
+
+.division-hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,107,0,0.14),
+            transparent 50%
+        );
+
+    pointer-events: none;
+}
+
+
+.division-hero-content {
+    position: relative;
+
+    max-width: 800px;
+
+    z-index: 2;
+}
+
+
+.division-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    color: var(--orange);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 4px;
+}
+
+
+.division-hero h1 {
+    margin: 0;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: clamp(42px, 7vw, 82px);
+
+    font-weight: 800;
+
+    line-height: 1.05;
+
+    letter-spacing: 2px;
+}
+
+
+.division-hero h1 span {
+    color: var(--orange);
+}
+
+
+.division-hero p {
+    max-width: 650px;
+
+    margin: 25px auto 0;
+
+    color: #858585;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+
+
+/* =====================================
+   CONTAINER
+===================================== */
+
+.division-container {
+    width: min(1150px, calc(100% - 50px));
+
+    margin: auto;
+}
+
+
+
+/* =====================================
+   SECTION HEADING
+===================================== */
+
+.club-leader-section,
+.teams-section {
+    padding: 100px 0;
+}
+
+
+.club-leader-section {
+    background: #0b0b0b;
+}
+
+
+.teams-section {
+    background: #080808;
+}
+
+
+.section-heading {
+    margin-bottom: 45px;
+}
+
+
+.section-heading > span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--orange);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+
+.section-heading h2 {
+    margin: 0;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: clamp(30px, 4vw, 48px);
+
+    line-height: 1.1;
+}
+
+
+.section-heading h2 strong {
+    color: var(--orange);
+}
+
+
+.section-heading p {
+    max-width: 600px;
+
+    margin-top: 15px;
+
+    color: #666;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+
+
+/* =====================================
+   CLUB LEADER
+===================================== */
+
+.club-leader-card {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        60px
+        75px
+        1fr
+        auto;
+
+    align-items: center;
+
+    gap: 25px;
+
+    min-height: 170px;
+
+    padding: 30px 35px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #151515,
+            #0d0d0d
+        );
+
+    border: 1px solid #292929;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.club-leader-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 3px;
+
+    background: var(--orange);
+}
+
+
+.club-leader-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    right: -100px;
+    top: -120px;
+
+    background: rgba(255,107,0,0.08);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+.club-leader-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(255,107,0,0.45);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35),
+        0 0 35px rgba(255,107,0,0.06);
+}
+
+
+.leader-number {
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 14px;
+
+    color: #444;
+}
+
+
+.leader-icon {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,107,0,0.35);
+
+    background: rgba(255,107,0,0.06);
+
+    color: var(--orange);
+
+    font-size: 22px;
+}
+
+
+.leader-main {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.leader-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--orange);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.leader-main h3 {
+    margin: 0;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 25px;
+
+    letter-spacing: 1px;
+}
+
+
+.leader-main p {
+    margin-top: 4px;
+
+    color: #666;
+
+    font-size: 12px;
+}
+
+
+.leader-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 35px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.leader-info-item {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.leader-info-item span {
+    color: #555;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.leader-info-item strong {
+    color: #ddd;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 13px;
+}
+
+
+.role-badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 44px;
+    height: 32px;
+
+    padding: 0 12px;
+
+    border: 1px solid rgba(255,107,0,0.4);
+
+    background: rgba(255,107,0,0.08);
+
+    color: var(--orange);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+
+/* =====================================
+   TEAM DIVISIONS
+===================================== */
+
+.division-card {
+    position: relative;
+
+    margin-bottom: 20px;
+
+    padding: 0;
+
+    background: #101010;
+
+    border: 1px solid #222;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.division-card:hover {
+    transform: translateY(-4px);
+
+    border-color: #353535;
+}
+
+
+.division-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 25px 30px;
+
+    border-bottom: 1px solid #202020;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,107,0,0.055),
+            transparent 55%
+        );
+}
+
+
+.division-number {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--orange);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.division-header h3 {
+    margin: 0;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 20px;
+
+    letter-spacing: 0.5px;
+}
+
+
+.division-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #292929;
+
+    color: #555;
+
+    font-size: 16px;
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.division-card:hover .division-icon {
+    color: var(--orange);
+
+    border-color: rgba(255,107,0,0.35);
+}
+
+
+.division-leader {
+    padding: 24px 30px;
+}
+
+
+.division-leader-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 17px;
+
+    color: #555;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.division-leader-title i {
+    color: var(--orange);
+}
+
+
+.leader-profile {
+    display: grid;
+
+    grid-template-columns:
+        52px
+        1fr
+        auto;
+
+    align-items: center;
+
+    gap: 17px;
+}
+
+
+.leader-avatar {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #181818;
+
+    border: 1px solid #292929;
+
+    color: #555;
+
+    font-size: 18px;
+}
+
+
+.leader-details h4 {
+    margin: 0 0 4px;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.leader-details span {
+    color: #555;
+
+    font-size: 11px;
+}
+
+
+.leader-details strong {
+    color: #888;
+
+    font-weight: 600;
+}
+
+
+
+/* =====================================
+   CTA
+===================================== */
+
+.division-cta {
+    position: relative;
+
+    padding: 100px 25px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,107,0,0.11),
+            transparent 50%
+        );
+
+    border-top: 1px solid #171717;
+}
+
+
+.division-cta > div {
+    max-width: 700px;
+
+    margin: auto;
+}
+
+
+.division-cta span {
+    color: var(--orange);
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+
+.division-cta h2 {
+    margin-top: 15px;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: clamp(25px, 4vw, 42px);
+}
+
+
+.division-cta h2 strong {
+    color: var(--orange);
+}
+
+
+.division-cta p {
+    margin: 12px 0 25px;
+
+    color: #666;
+
+    font-size: 13px;
+}
+
+
+.division-cta-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 22px;
+
+    background: var(--orange);
+
+    color: #080808;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.division-cta-button:hover {
+    transform: translateY(-3px);
+
+    background: var(--orange-light);
+}
+
+
+.division-cta-button i {
+    font-size: 11px;
+}
+
+
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 950px) {
+
+    .club-leader-card {
+        grid-template-columns:
+            55px
+            65px
+            1fr;
+    }
+
+
+    .leader-info {
+        grid-column: 3;
+
+        margin-top: 5px;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .division-hero {
+        min-height: 48vh;
+
+        padding:
+            130px
+            20px
+            70px;
+    }
+
+
+    .division-container {
+        width: min(
+            100% - 35px,
+            600px
+        );
+    }
+
+
+    .club-leader-section,
+    .teams-section {
+        padding: 75px 0;
+    }
+
+
+    .club-leader-card {
+        grid-template-columns:
+            55px
+            1fr;
+
+        gap: 18px;
+
+        padding: 25px;
+    }
+
+
+    .leader-number {
+        display: none;
+    }
+
+
+    .leader-icon {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+
+    .leader-main {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+
+    .leader-info {
+        grid-column: 1 / -1;
+
+        padding-top: 20px;
+
+        border-top: 1px solid #222;
+    }
+
+
+    .division-header {
+        padding: 22px;
+    }
+
+
+    .division-leader {
+        padding: 22px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .division-hero h1 {
+        font-size: 38px;
+    }
+
+
+    .division-hero p {
+        font-size: 12px;
+    }
+
+
+    .section-heading h2 {
+        font-size: 30px;
+    }
+
+
+    .club-leader-card {
+        display: grid;
+
+        grid-template-columns: 55px 1fr;
+
+        gap: 15px;
+    }
+
+
+    .leader-icon {
+        width: 55px;
+        height: 55px;
+
+        font-size: 18px;
+    }
+
+
+    .leader-main h3 {
+        font-size: 18px;
+    }
+
+
+    .leader-info {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 20px;
+    }
+
+
+    .division-header h3 {
+        font-size: 16px;
+    }
+
+
+    .division-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 13px;
+    }
+
+
+    .leader-profile {
+        grid-template-columns:
+            45px
+            1fr
+            auto;
+
+        gap: 12px;
+    }
+
+
+    .leader-avatar {
+        width: 45px;
+        height: 45px;
+    }
+
+
+    .leader-details h4 {
+        font-size: 12px;
+    }
+
+
+    .leader-details span {
+        font-size: 9px;
+    }
+
+
+    .role-badge {
+        min-width: 38px;
+        height: 29px;
+
+        padding: 0 9px;
+
+        font-size: 9px;
+    }
+
+}

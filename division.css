@@ -1308,8 +1308,7 @@
 }
 
 
-.division-card.open
-.division-members {
+.division-card.open.division-members {
 
     display:
         block;
@@ -1323,14 +1322,18 @@
    HIDE LEADER UNTIL OPEN
 ========================================================= */
 
-.division-card:not(.open)
-.division-leader-section {
+.division-card:not(.open) .division-leader-section {
 
     display:
         none;
 
 }
+.division-card.open .division-leader-section {
 
+    display:
+        block;
+
+}
 @keyframes divisionOpen {
 
     from {

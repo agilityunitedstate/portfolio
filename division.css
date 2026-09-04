@@ -1296,26 +1296,20 @@
 
 .division-members {
 
-    display:
-        none;
+    display:none;
 
-    padding:
-        0 30px 30px;
+    padding: 0 30px 30px;
 
-    background:
-        #0d0d0d;
+    background: #0d0d0d;
 
 }
 
 
-.division-card.open.division-members {
+.division-card.open .division-members {
 
-    display:
-        block;
+    display: block;
 
-    animation:
-        divisionOpen
-        0.35s ease;
+    animation: divisionOpen 0.35s ease;
 
 }
 /* =========================================================
@@ -1324,14 +1318,12 @@
 
 .division-card:not(.open) .division-leader-section {
 
-    display:
-        none;
+    display: none;
 
 }
 .division-card.open .division-leader-section {
 
-    display:
-        block;
+    display: block;
 
 }
 @keyframes divisionOpen {
